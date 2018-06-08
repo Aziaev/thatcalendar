@@ -13,7 +13,7 @@ class Home extends Component {
   render() {
     const { toogleCalendarField } = this.props;
     return (
-      <Col xs={6} xsOffset={3}>
+      <Col xs={12}>
         <div className="text-center">
           <PageHeader> Push buttons and open values </PageHeader>
           <Panel>
