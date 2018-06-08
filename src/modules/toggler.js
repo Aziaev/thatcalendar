@@ -1,4 +1,5 @@
 import { getDateString } from '../helpers/index';
+import { initialState } from '../constants';
 
 export const DAY = 'DAY';
 export const MONTH = 'MONTH';
@@ -8,40 +9,36 @@ export const RESET = 'RESET';
 export default (state = initialState, action) => {
   switch (action.type) {
     case DAY:
-      console.log(`reducer DAY`);
       if (state.day === null) {
         return {
           ...state,
-          day: getDateString(state.date, 'DAY')
+          day: getDateString(state.date, DAY)
         };
       } else return {
         ...state,
         day: null
       };
     case MONTH:
-      console.log(`reducer MONTH`);
       if (state.month === null) {
         return {
           ...state,
-          month: getDateString(state.date, 'MONTH')
+          month: getDateString(state.date, MONTH)
         };
       } else return {
         ...state,
         month: null
       };
     case YEAR:
-      console.log(`reducer YEAR`);
       if (state.year === null) {
         return {
           ...state,
-          year: getDateString(state.date, 'YEAR')
+          year: getDateString(state.date, YEAR)
         };
       } else return {
         ...state,
         year: null
       };
     case RESET:
-      console.log(`reducer RESET`);
       return {
         ...state,
         day: null,
@@ -55,8 +52,6 @@ export default (state = initialState, action) => {
 }
 
 export const toogleCalendarField = (fieldName) => {
-  console.log(`toggleCalendar(${fieldName})`);
-
   return dispatch => {
     switch (fieldName) {
       case DAY:
@@ -77,11 +72,4 @@ export const toogleCalendarField = (fieldName) => {
         });
     }
   };
-};
-
-const initialState = {
-  date: new Date(),
-  day: null,
-  month: null,
-  year: null,
 };

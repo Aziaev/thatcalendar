@@ -3,24 +3,23 @@ import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
 import { Grid, Nav, Navbar, NavItem, Row } from 'react-bootstrap';
 import { Link, Route } from 'react-router-dom';
-import About from "./components/About";
-import Home from "./components/Home";
+import About from "./views/About";
+import Home from "./views/Home";
 
 const App = () => (
   <div>
     <Navbar inverse collapseOnSelect>
       <Navbar.Header>
         <Navbar.Brand>
-          <Link to="/"> Thatcalendar SPA </Link>
+          <Link to="/">Thatcalendar SPA</Link>
         </Navbar.Brand>
       </Navbar.Header>
       <Nav>
-        <NavItem eventKey={2} href="#">
+        <NavItem>
           <Link to="/about">About</Link>
         </NavItem>
       </Nav>
     </Navbar>
-
     <Grid>
       <Row className="show-grid">
         <Route exact path="/" component={Home}/>
