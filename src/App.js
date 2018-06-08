@@ -11,7 +11,7 @@ const App = () => (
     <Navbar inverse collapseOnSelect>
       <Navbar.Header>
         <Navbar.Brand>
-          <Link to="/"> Calendar SPA </Link>
+          <Link to="/"> Thatcalendar SPA </Link>
         </Navbar.Brand>
       </Navbar.Header>
       <Nav>

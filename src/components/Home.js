@@ -3,16 +3,13 @@ import { Button, ButtonGroup, Col, PageHeader, Panel, Table } from 'react-bootst
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { bindActionCreators } from 'redux';
-import { decrement, decrementAsync, increment, incrementAsync } from '../modules/counter';
+import { toogleCalendarField } from '../modules/toggler';
 
 class Home extends Component {
 
-  elementToggle(value) {
-    console.log(value);
-  }
-
   render() {
-    const { count, increment, incrementAsync, isIncrementing, decrement, decrementAsync, isDecrementing, changePage } = this.props;
+    console.log(this.props);
+    const { toogleCalendarField, day, month, year } = this.props;
     return (
       <Col xs={6} xsOffset={3}>
         <div className="text-center">
@@ -21,19 +18,19 @@ class Home extends Component {
             <Panel>
               <Panel.Body>
                 <ButtonGroup>
-                  <Button style={{ width: '100px' }} onClick={() => this.elementToggle('DAY')}>Day</Button>
-                  <Button style={{ width: '100px' }} onClick={() => this.elementToggle('MONTH')}>Month</Button>
-                  <Button style={{ width: '100px' }} onClick={() => this.elementToggle('YEAR')}>Year</Button>
+                  <Button style={{ width: '100px' }} onClick={() => toogleCalendarField('DAY')}>Day</Button>
+                  <Button style={{ width: '100px' }} onClick={() => toogleCalendarField('MONTH')}>Month</Button>
+                  <Button style={{ width: '100px' }} onClick={() => toogleCalendarField('YEAR')}>Year</Button>
                 </ButtonGroup>
                 <Table responsive>
                   <thead>
                   <tr>
-                    <th></th>
+                    <th/>
                   </tr>
                   </thead>
                   <tbody>
                   <tr>
-                    <td>Table cell</td>
+                    <td><h1>{day ? day : '__'} . {month ? month : '__'} . {year ? year : '____'}</h1></td>
                   </tr>
                   </tbody>
                 </Table>
@@ -41,27 +38,12 @@ class Home extends Component {
                   <Button
                     bsStyle="danger"
                     style={{ width: '300px' }}
-                    onClick={() => this.elementToggle('RESET')}>
+                    onClick={toogleCalendarField}>
                     Reset
                   </Button>
                 </ButtonGroup>
               </Panel.Body>
             </Panel>
-          </div>
-          <div>
-            <p>Count: {count}</p>
-
-            <p>
-              <Button onClick={increment} disabled={isIncrementing}>Increment</Button>
-              <Button onClick={incrementAsync} disabled={isIncrementing}>Increment Async</Button>
-            </p>
-
-            <p>
-              <Button onClick={decrement} disabled={isDecrementing}>Decrementing</Button>
-              <Button onClick={decrementAsync} disabled={isDecrementing}>Decrement Async</Button>
-            </p>
-
-            <p><Button onClick={() => changePage()}>Go to about page via redux</Button></p>
           </div>
         </div>
       </Col>
@@ -70,17 +52,13 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => ({
-  count: state.counter.count,
-  isIncrementing: state.counter.isIncrementing,
-  isDecrementing: state.counter.isDecrementing
+  day: state.toggler.day,
+  month: state.toggler.month,
+  year: state.toggler.year
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  toggleElement,
-  increment,
-  incrementAsync,
-  decrement,
-  decrementAsync,
+  toogleCalendarField,
   changePage: () => push('/about')
 }, dispatch);
 

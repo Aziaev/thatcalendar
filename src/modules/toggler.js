@@ -1,7 +1,4 @@
-export const INCREMENT_REQUESTED = 'counter/INCREMENT_REQUESTED';
-export const INCREMENT = 'counter/INCREMENT';
-export const DECREMENT_REQUESTED = 'counter/DECREMENT_REQUESTED';
-export const DECREMENT = 'counter/DECREMENT';
+import { getDateString } from '../helpers/index';
 
 export const DAY = 'DAY';
 export const MONTH = 'MONTH';
@@ -10,30 +7,46 @@ export const RESET = 'RESET';
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case INCREMENT_REQUESTED:
-      return {
+    case DAY:
+      console.log(`reducer DAY`);
+      if (state.day === null) {
+        return {
+          ...state,
+          day: getDateString(state.date, 'DAY')
+        };
+      } else return {
         ...state,
-        isIncrementing: true
+        day: null
       };
-
-    case INCREMENT:
-      return {
+    case MONTH:
+      console.log(`reducer MONTH`);
+      if (state.month === null) {
+        return {
+          ...state,
+          month: getDateString(state.date, 'MONTH')
+        };
+      } else return {
         ...state,
-        count: state.count + 1,
-        isIncrementing: !state.isIncrementing
+        month: null
       };
-
-    case DECREMENT_REQUESTED:
-      return {
+    case YEAR:
+      console.log(`reducer YEAR`);
+      if (state.year === null) {
+        return {
+          ...state,
+          year: getDateString(state.date, 'YEAR')
+        };
+      } else return {
         ...state,
-        isDecrementing: true
+        year: null
       };
-
-    case DECREMENT:
+    case RESET:
+      console.log(`reducer RESET`);
       return {
         ...state,
-        count: state.count - 1,
-        isDecrementing: !state.isDecrementing
+        day: null,
+        month: null,
+        year: null
       };
 
     default:
@@ -41,59 +54,9 @@ export default (state = initialState, action) => {
   }
 }
 
-export const increment = () => {
-  return dispatch => {
-    dispatch({
-      type: INCREMENT_REQUESTED
-    });
-
-    dispatch({
-      type: INCREMENT
-    });
-  };
-};
-
-export const incrementAsync = () => {
-  return dispatch => {
-    dispatch({
-      type: INCREMENT_REQUESTED
-    });
-
-    return setTimeout(() => {
-      dispatch({
-        type: INCREMENT
-      });
-    }, 3000);
-  };
-};
-
-export const decrement = () => {
-  return dispatch => {
-    dispatch({
-      type: DECREMENT_REQUESTED
-    });
-
-    dispatch({
-      type: DECREMENT
-    });
-  };
-};
-
-export const decrementAsync = () => {
-  return dispatch => {
-    dispatch({
-      type: DECREMENT_REQUESTED
-    });
-
-    return setTimeout(() => {
-      dispatch({
-        type: DECREMENT
-      });
-    }, 3000);
-  };
-};
-
 export const toogleCalendarField = (fieldName) => {
+  console.log(`toggleCalendar(${fieldName})`);
+
   return dispatch => {
     switch (fieldName) {
       case DAY:
@@ -118,7 +81,7 @@ export const toogleCalendarField = (fieldName) => {
 
 const initialState = {
   date: new Date(),
-  day: '__',
-  month: '__',
-  year: '____',
+  day: null,
+  month: null,
+  year: null,
 };
